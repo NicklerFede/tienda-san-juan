@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+<head th:replace="layout::head">
+
+</head>
+
+<body id="body">
+
+	<main layout:fragment="main">
+
+		<!--ARTICULO-->
+		<section class="single-product single-product-section" th:object="${articulo}">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<ol class="breadcrumb">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="shop.html">Shop</a></li>
+							<li class="active">Single Product</li>
+						</ol>
+					</div>
+				</div>
+				<div class="row mt-20">
+					<div class="col-md-5">
+						<div class="single-product-slider">
+							<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+								<div class='carousel-outer'>
+									<!-- me art lab slider -->
+									<div class='carousel-inner '>
+										<div class='item active'>
+											<img th:src="@{/foto/articulo(idArticulo= ${articulo.id})}" alt=''
+												data-zoom-image="images/shop/single-products/product-1.jpg" />
+										</div>
+										
+
+									</div>
+
+									<!-- sag sol -->
+									<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+										<i class="tf-ion-ios-arrow-left"></i>
+									</a>
+									<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+										<i class="tf-ion-ios-arrow-right"></i>
+									</a>
+								</div>
+
+								<!-- thumb -->
+								<ol class='carousel-indicators mCustomScrollbar meartlab'>
+									<li data-target='#carousel-custom' data-slide-to='0' class='active'>
+										<img th:src="@{/foto/articulo(idArticulo= ${articulo.id})}" alt='' />
+									</li>
+									
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div class="single-product-details">
+							<h1 th:text="${articulo.title}"> </h1>
+							<h2><p class="product-price" th:text="'$'+${articulo.price}"></p></h2>
+
+							<p class="product-description mt-20" th:text="${articulo.description}">
+							</p>
+							<div class="product-single-details">
+								<div class="col-md-6 product-single-div">
+									<table>
+										<tr>
+											<th>
+												<p class="product-single-title">Color: </p>
+											</th>
+											<th>
+												<p class="product-single-description" th:text="${articulo.color}"></p>
+											</th>
+										</tr>
+										<tr>
+											<th th:if="${articulo.tipoMedida != null}">
+												<p class="product-single-title">Tamaño: </p>
+											</th>
+											<th>
+												<p class="product-single-description" th:if="${articulo.ropaComun != null}" th:text="${articulo.ropaComun}"></p>
+												<p class="product-single-description" th:if="${articulo.pantalones != null}" th:text="${articulo.pantalones.nombreVista}"></p>
+												<p class="product-single-description" th:if="${articulo.ninios != null}" th:text="${articulo.ninios.nombreVista}"></p>
+												<p class="product-single-description" th:if="${articulo.bebes != null}" th:text="${articulo.bebes.nombreVista}"></p>
+												<p class="product-single-description" th:if="${articulo.plazas != null}" th:text="${articulo.plazas.nombreVista}"></p>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<p class="product-single-title">Cantidad:  </p>
+											</th>
+											<th>
+												<p class="product-single-description" th:text="${articulo.stock}+' Unidades'"></p>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<p class="product-single-title">Categoria:</p>
+											</th>
+											<th>
+												<p class="product-single-description" th:text=" ${articulo.categoria}"></p>
+											</th>
+										</tr>
+									</table>
+								</div>
+								<div class="col-md-6 product-single-div">
+									<table>
+										<tr>
+											<th class="d-flex">
+												<span><img  class="product-single-icons" src="/images/delivery-truck.png" alt="delivery-truck"></span>
+												<p class="product-single-title-2">Envíos a todo el país</p>
+											</li>
+										</tr>
+										<tr>
+											<th class="d-flex">
+												<span><img  class="product-single-icons" src="/images/aim.png" alt="aim"></span>
+												<p class="product-single-title-2">Retiro GRATIS por sucursal</p>
+											</th>
+										</tr>
+										<tr>
+											<th class="d-flex">
+												<span><img  class="product-single-icons" src="/images/credit-card.png" alt="credit-card"></span>
+												<p class="product-single-title-2">Envíos gratis en todo el sitio desde $7000</p>
+											</th>
+										</tr>
+									</table>
+								</div>
+								<div class="cart-button">
+									<a th:if="${articulo.stock > 0}"
+									th:href="@{/detalle/agregarAlCarrito (idArticulo=${articulo.id})}"
+										class="btn btn-main mt-20">Agregar al Carrito</a>
+										<h3 th:if="${articulo.stock = 0}">Sin Stock</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="products related-products section">
+			<div class="container">
+				<div class="row">
+					<div class="title text-center">
+						<h2>Productos Relacionados</h2>
+					</div>
+				</div>				
+				<div class="row">
+
+					<div class="col-md-3" th:each="item : ${articulos}">
+						<div class="product-item">
+							<div class="product-thumb">
+								<!-- <span class="bage">Sale</span> -->
+								<img class="img-responsive" th:src="@{/foto/articulo(idArticulo= ${item.id})}" 
+									alt="product-img" />
+								
+							</div>
+							<div class="product-content">
+								<h4><a href="product-single.html" th:text="${item.title}">Reef Boardsport</a></h4>
+								<p class="price" th:text="'$'+${item.price}">$200</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+
+
+		
+	</main>
+
+</body>
+
+</html>

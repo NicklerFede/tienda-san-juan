@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+<head th:replace="layout::head">
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>Tienda San Juan</title>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Construction Html5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Themefisher Constra HTML Template v1.0">
+
+
+</head>
+
+<body id="body">
+
+    <main layout:fragment="main">
+        <section class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content">
+                            <h1 class="page-name">Dashboard</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active">my account</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="user-dashboard page-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-inline dashboard-menu text-center">
+                            <li><a class="active" href="/usuario/compras">Dashboard</a></li>
+                            <li><a href="/usuario/direccion">Direcciones</a></li>
+                            <li><a href="/usuario/perfil">Perfil</a></li>
+                        </ul>
+                        <div class="dashboard-wrapper user-dashboard">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="media-object user-img" src="/images/avater.jpg" alt="Image">
+                                </div>
+                                <div class="media-body">
+                                    <h2 class="media-heading" th:text="'Bienvenido '+${session?.usuario?.fullName}">Welcome Adam Smith</h2>
+                                    <p th:if="${status != null}" th:text="${status}">asgs</p>
+                                </div>
+                            </div>
+
+
+                            <div class="total-order mt-20" th:if="${status == null}">
+                                <h4>Total Orders</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Fecha</th>
+                                                <th>Items</th>
+                                                <th>Precio Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td th:text="'#'+${orden?.orderId}"><a href="#!">#252125</a></td>
+                                                <td th:text="${orden?.purchaseDate}">Mar 25, 2016</td>
+                                                <td>2</td>
+                                                <td th:text="'$ '+${orden?.total}">$ 99.00</td>
+                                            </tr>                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
+</html>

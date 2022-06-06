@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+<head th:replace="layout::head">
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>Tienda San Juan</title>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Construction Html5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Themefisher Constra HTML Template v1.0">
+
+
+</head>
+
+<body id="body">
+
+    <main layout:fragment="main">
+        <section class="page-header     ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content">
+                            <h1 class="page-name">Cart</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active">cart</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="page-wrapper cart-wrapper">
+            <div class="cart shopping">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="block">
+                                <div class="product-list">
+                                    <form method="post">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="">Nombre</th>
+                                                    <th class="">Precio Unitario</th>
+                                                    <th class="">Cantidad</th>
+                                                    <th class="">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="" th:each="item, contador : ${session.carrito}">
+                                                    <td class="">
+                                                        <div class="product-info">
+                                                            <img width="80"
+                                                                th:src="@{/foto/articulo(idArticulo=${item.articulo.id})}"
+                                                                alt="Imagen del producto." />
+                                                            <a href="#link hacia el producto"
+                                                                th:text="${item.articulo.title}"></a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="" th:text="'$'+${item.precioUnit}"></td>
+                                                    <td class="" th:text="'x '+${item.quantity}"></td>
+                                                    <td class="">
+                                                        <a class="product-remove"
+                                                            th:href="@{/detalle/quitarDelCarrito(posicion=${contador.index})}">Eliminar</a>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                        <a href="/orden/checkout" class="btn btn-main pull-right">Checkout</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

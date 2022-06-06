@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+  <head th:replace="layout::head"> 
+  </head>
+
+  <body id="body">
+    <main layout:fragment="main">
+      <div class="hero-slider">
+        <div
+          class="slider-item th-fullpage hero-area"
+          style="background-image: url(images/slider/modelos2.webp)"
+        >
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 text-center">
+                <p
+                  data-duration-in=".3"
+                  data-animation-in="fadeInUp"
+                  data-delay-in=".1"
+                >
+                  INDUMENTARIA
+                </p>
+                <h1
+                  data-duration-in=".3"
+                  data-animation-in="fadeInUp"
+                  data-delay-in=".5"
+                >
+                  Los productos ideales para tu hogar <br />
+                  Encontra eso que necesitás
+                </h1>
+                <a
+                  data-duration-in=".3"
+                  data-animation-in="fadeInUp"
+                  data-delay-in=".8"
+                  class="btn"
+                  href="/articulo/listar"
+                  >Ver productos</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-12 index-info-section info-div">
+        <div class="index-info-section"> 
+            <img class="index-icons" src="/images/credit-card.png" alt="icon">
+            <div class="index-description">
+              <p>Multiples formas de pago</p>
+              <p class="higlighted-text-index">Ver Medios de pago</p>
+            </div>
+          </div>
+        <div class="index-info-section"> 
+            <img class="index-icons" src="/images/bag.png" alt="icon">
+            <div class="index-description">
+              <p>Solo las primeras marcas</p>
+              <p class="higlighted-text-index">En todos los departamentos</p>
+            </div>
+          </div>
+        <div class="index-info-section"> 
+            <img class="index-icons" src="/images/delivery-truck.png" alt="icon">
+            <div class="index-description">
+              <p>Envíos GRATIS y retiro en tienda</p>
+              <p class="higlighted-text-index">A Partir De $6.000</p>
+            </div>
+          </div>
+        <div class="index-info-section"> 
+            <img class="index-icons" src="/images/tag.png" alt="icon">
+            <div class="index-description">
+              <p>OFERTAS imperdibles!</p>
+              <p class="higlighted-text-index">Ver Promociones</p>
+            </div>
+          </div>
+      </div>
+      <div>
+        <div class="title text-center">
+          <h2 class="brands"><span>NUESTRAS MARCAS</span></h2>
+        </div>
+      </div>
+      <div class="brands-div">
+        <div class="brand-carousel section-padding owl-carousel col-md-8">
+          <div class="single-logo">
+            <img src="https://sanjuanar.vtexassets.com/arquivos/logo.png" alt="">
+          </div>
+        <div class="single-logo">
+            <img src="https://sanjuanar.vtexassets.com/arquivos/logo-2png.png" alt="">
+          </div>
+        <div class="single-logo">
+            <img src="https://sanjuanar.vtexassets.com/arquivos/logo-3.png" alt="">
+          </div>
+        <div class="single-logo">
+            <img src="https://sanjuanar.vtexassets.com/arquivos/logo-4.png" alt="">
+          </div>
+        <div class="single-logo">
+            <img src="https://sanjuanar.vtexassets.com/arquivos/logo-5.png" alt="">
+          </div>
+        </div>      
+      </div>
+      
+
+      <section class="product-category section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="title text-center">
+                <h2>Categorias</h2>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="category-box">
+                <a href="/seccion?categoria=dormitorio">
+                  <img class="cat-img" src="images/bedroom.jpg" alt="" />
+                  <div class="content">
+                    <h3>Dormitorio</h3>
+                    <p>Sabanas, Acolchados, Cubrecamas, Cortinas</p>
+                  </div>
+                </a>
+              </div>
+              <div class="category-box">
+                <a href="/seccion?categoria=cocina">
+                  <img src="images/kitchen.webp" alt="" />
+                  <div class="content">
+                    <h3>Cocina</h3>
+                    <p>Accesorios, Ollas y Sartenes, Mates, Vagilla</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="category-box category-box-2">
+                <a href="/seccion?categoria=banio">
+                  <img class="cat-img-2" src="images/bathroom.jpg" alt="" />
+                  <div class="content">
+                    <h3>Baño</h3>
+                    <p>Toallas, Cortinas, Accesorios de baño</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="products section bg-gray products-main">
+        <div class="container">
+          <div class="row">
+            <div class="title text-center">
+              <h2>Productos destacados</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" th:each="item : ${articulos}">
+              <a th:href="@{/articulo/producto (idArticulo=${item.id})}">
+                <div class="product-item">
+                  <div class="product-thumb">
+                    <img
+                      class="img-responsive"
+                      th:src="@{/foto/articulo(idArticulo= ${item.id})}"
+                      alt="product-img"
+                    />
+
+                    <!-- <div class="preview-meta">
+                        <ul>
+                          <li>
+                            <span data-toggle="modal" data-target="#product-modal"
+                              id="modal-product" th:data-id="#{item.id}">
+                              <i class="tf-ion-ios-search-strong">
+  
+                              </i>
+                            </span>
+                          </li>
+                          <li>
+                            <a href="#"><i class="tf-ion-ios-heart"></i></a>
+                          </li>
+                          <li>
+                            <a th:href="@{/detalle/agregarAlCarrito (idArticulo = ${item.id})}"><i
+                                class="tf-ion-android-cart"></i></a>
+                          </li>
+                        </ul>
+                      </div> -->
+                  </div>
+                  <div class="product-content">
+                    <h4>
+                      <a href="product-single.html" th:text="${item.title}">
+                      </a>
+                    </h4>
+                    <div>
+                      <p class="price" th:text="'$'+${item.price}"></p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+            <!-- Modal -->
+            <!-- Aparece cuando aprieto el carrito pero hay que hacer que aparezca la imagen correspondiente -->
+            <!-- <div class="modal product-modal fade" id="product-modal">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <i class="tf-ion-close"></i>
+              </button>
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-8 col-sm-6 col-xs-12">
+                        <div class="modal-image">
+                          <img
+                            class="img-responsive"
+                            src="images/shop/products/modal-product.jpg"
+                            alt="product-img"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="product-short-details">
+                          <h2 class="product-title">GM Pendant, Basalt Grey</h2>
+                          <p class="product-price">$200</p>
+                          <p class="product-short-description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Rem iusto nihil cum. Illo laborum numquam rem
+                            aut officia dicta cumque.
+                          </p>
+                          <a href="cart.html" class="btn btn-main"
+                            >Add To Cart</a
+                          >
+                          <a
+                            href="product-single.html"
+                            class="btn btn-transparent"
+                            >View Product Details</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+             /.modal
+          </div>
+        </div>
+      </section> -->
+
+      <!--
+Start Call To Action
+==================================== -->
+      <section class="call-to-action bg-gray section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="title">
+                <h2>SUSCRIBETE A NUESTRO NEWSLETTER</h2>
+                <p>
+                  Podrás enterarte de promos y descuentos exclusivos,
+                  <br />Dejanos tu correo!
+                </p>
+              </div>
+              <div class="col-lg-6 col-md-offset-3">
+                <div class="input-group subscription-form">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ingresa tu correo!"
+                  />
+                  <span class="input-group-btn">
+                    <button class="btn btn-main" type="button">
+                      Subscribete!
+                    </button>
+                  </span>
+                </div>
+                <!-- /input-group -->
+              </div>
+              <!-- /.col-lg-6 -->
+            </div>
+          </div>
+          <!-- End row -->
+        </div>
+        <!-- End container -->
+      </section>
+      <!-- End section -->
+
+      <section class="section instagram-feed">
+        <div class="container">
+          <div class="row">
+            <div class="title" id="sucursales">
+              <h2>Podés encontrarnos en</h2>
+            </div>
+          </div>
+
+          <div id="otras-sucursales">
+            <div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.384366166787!2d-65.20794778545117!3d-26.82772449612538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c1129ab05b9%3A0x7aa40fa8e76d158b!2sTienda%20San%20Juan%20-%20Tucuman!5e0!3m2!1ses-419!2sar!4v1650320855081!5m2!1ses-419!2sar"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div>
+              <span>Otras Sucursales</span>
+
+              <div>
+                <ul>
+                  <li>
+                    <b>Tienda San Juan Venta Online</b>
+                    <p>Moreno 1245, CABA (1091) - Solo retiros</p>
+                    <span>Lunes a Viernes de 9:00 a 17:00 hs.</span>
+                  </li>
+
+                  <li>
+                    <b>Tienda San Juan Tucumán</b>
+                    <p>Peatonal Mendoza 601, San Miguel de Tucumán, Tucumán</p>
+                    <span
+                      >Lunes a Viernes de 9:00 a 13:00 y de 17:00 a 21:00 hs -
+                      Sábados de 09:00 a 13:00 y de 17.30 a 21:00 hs.</span
+                    >
+                  </li>
+
+                  <li>
+                    <b>Tienda San Juan Casa & Hogar</b>
+                    <p>Muñecas 272, San Miguel de Tucumán, Tucumán</p>
+                    <span
+                      >Lunes a Viernes de 9:00 a 13:00 y de 17:00 a 21:00 hs -
+                      Sábados de 09:00 a 13:00 y de 17.30 a 21:00 hs.</span
+                    >
+                  </li>
+
+                  <li>
+                    <b>Tienda San Juan Salta</b>
+                    <p>Peatonal Caseros 601, Salta</p>
+                    <span
+                      >Lunes a Viernes de 9:00 a 13:00 y de 17:00 a 21:00 hs -
+                      Sábados de 09:00 a 13:00 y de 17.00 a 21:00 hs</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+      <script src="custom.js"></script>
+      </section>
+    </main>
+  </body>
+</html>

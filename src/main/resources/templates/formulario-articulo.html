@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+<head th:replace="layout::head">
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>Tienda San Juan</title>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Construction Html5 Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Themefisher Constra HTML Template v1.0">
+
+
+</head>
+
+<body id="body">
+
+    <main layout:fragment="main">
+        <section class="page-header page-header-form">
+            <div class="side-options">
+                <a th:href="@{/articulo/listar}" class="btn btn-main btn-medium"> Ir a la lista de articulos</a>
+                <br>
+                <br>
+                <a th:href="@{/}" class="btn btn-main btn-medium">Volver a página principal</a>
+            </div>
+            <div class="container form-container">
+                <!-- Mensajes de error y exito -->
+                <div th:if="${error != null}" th:text="${error}" class="alert alert-danger alert-common" role="alert"><i
+                        class="tf-ion-close-circled"></i><span>Error!</span> </div>
+                <div th:if="${succes != null}" th:text="${succes}" class="alert alert-success alert-common"
+                    role="alert"><i class="tf-ion-thumbsup"></i><span>!</span> </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content header-content">
+                            <h1 class="page-name">Ingresar un nuevo articulo</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active">articulo</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="page-wrapper page-form">
+            <div class="checkout shopping">
+                <div class="container">
+                    <div class="row">
+                        <div class="">
+                            <div class="block billing-details">
+                                <h4 class="widget-title">Detalles del producto</h4>
+
+                                <form action="/articulo/save" method="POST" th:object="${articulo}"
+                                    enctype="multipart/form-data">
+                                    <input type="text" name="id" th:field="${articulo.id}" hidden />
+
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="full_name">Subir Imagen</label>
+                                        <input class="form-control" type="file" name="file" id="" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="full_name">Nombre</label>
+                                        <input th:field="${articulo.title}" type="text" class="form-control"
+                                            id="full_name"
+                                            placeholder="Ingrese el nombre tal cual como se verá en la tineda" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="user_address">Precio</label>
+                                        <input th:field="${articulo.price}" type="number" class="form-control"
+                                            id="user_address" placeholder="" />
+                                    </div>
+
+                                    <div class="checkout-country-code clearfix">
+                                        <div class="form-group">
+                                            <label class="form-label" for="user_post_code">Color</label>
+                                            <input th:field="${articulo.color}" type="text" class="form-control"
+                                                id="user_post_code" name="" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="user_city">Stock</label>
+                                            <input th:field="${articulo.Stock}" type="number" class="form-control"
+                                                id="user_city" name="" value="" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="material">Material</label>
+                                        <input th:field="${articulo.material}" type="text" class="form-control"
+                                            id="material" placeholder="" />
+                                    </div>
+
+                                    <div class="form-group form-options-group">
+                                    <div class="form-group form-options col-md-3">
+                                        <label class="form-label" for="material">Categoria</label>
+                                        <select id="" th:field="*{categoria}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option
+                                                th:each="categoria : ${T(com.tienda.sanjuan.Enums.Seccion).values()}"
+                                                th:value="${categoria}" th:text="${categoria.nombreVista}"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label" for="material">Tipo de medidas</label>
+                                        <select id="tipoMedida" th:field="*{tipoMedida}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option
+                                                th:each="tipoMedida : ${T(com.tienda.sanjuan.Enums.TipoMedida).values()}"
+                                                th:value="${tipoMedida}" th:text="${tipoMedida.nombreVista}"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group d-none tipo-medida col-md-3" id="ROPA_COMUN">
+                                        <label class="form-label">Medidas</label>
+                                        <select th:field="*{ropaComun}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option
+                                                th:each="medida : ${T(com.tienda.sanjuan.Enums.RopaNormal).values()}"
+                                                th:value="${medida}" th:text="${medida}"
+                                                th:selected='${articulo.ropaComun}'></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group d-none tipo-medida col-md-3" id="PANTALONES">
+                                        <label class="form-label">Medidas</label>
+                                        <select th:field="*{pantalones}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option
+                                                th:each="medida : ${T(com.tienda.sanjuan.Enums.Pantalones).values()}"
+                                                th:value="${medida}" th:text="${medida.nombreVista}"
+                                                th:selected='${articulo.pantalones}'></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group d-none tipo-medida col-md-3" id="NIÑOS">
+                                        <label class="form-label">Medidas</label>
+                                        <select th:field="*{ninios}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option th:each="medida : ${T(com.tienda.sanjuan.Enums.Ninios).values()}"
+                                                th:value="${medida}" th:text="${medida.nombreVista}"
+                                                th:selected='${articulo.ninios}'></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group d-none tipo-medida col-md-3" id="BEBES">
+                                        <label class="form-label">Medidas</label>
+                                        <select th:field="*{bebes}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option th:each="medida : ${T(com.tienda.sanjuan.Enums.Bebes).values()}"
+                                                th:value="${medida}" th:text="${medida.nombreVista}"
+                                                th:selected='${articulo.bebes}'></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group d-none tipo-medida col-md-3" id="PLAZAS">
+                                        <label class="form-label">Medidas</label>
+                                        <select th:field="*{plazas}">
+                                            <option value="">Seleccione una opcion..</option>
+                                            <option th:each="medida : ${T(com.tienda.sanjuan.Enums.Plazas).values()}"
+                                                th:value="${medida}" th:text="${medida.nombreVista}"
+                                                th:selected='${articulo.plazas}'></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label" for="alta">Destacado ?</label>
+                                        <input th:field="${articulo.destacado}" type="checkbox" name="" id="highlighted"></input>
+                                    </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label-2 col-md-12" for="description">Descripción</label>
+                                        <textarea th:field="${articulo.description}" class="form-control" name=""
+                                            id="description" cols="10" rows="5"></textarea>
+                                    </div>
+
+
+
+                                    <button class="btn btn-main btn-medium btn-round d-flex align-items-center" type="submit">Guardar</button>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="coupon-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Enter Coupon Code">
+                            </div>
+                            <button type="submit" class="btn btn-main">Apply Coupon</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+
+</html>
